@@ -83,6 +83,8 @@ catch
     }
 }
 
+
+
 Get-Date |Add-Content $logfile
 
 # Exit 10 --> EMC PowerPath doesn't found on server

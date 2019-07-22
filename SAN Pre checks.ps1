@@ -55,7 +55,8 @@ $computername,$diskinfo,$HBApath,$HBALun | Out-File $logFile -Append
 if ((Get-Service -DisplayName 'Cluster Service').status -eq "running" )
 
  { 
-    
+    try
+    {
     Import-Module Failoverclusters
 
 # To get clustergroup, clusterresource, disksignature,DiskIDGuid status & information
@@ -70,15 +71,19 @@ if ((Get-Service -DisplayName 'Cluster Service').status -eq "running" )
 #Write-Output $resourcestatus | Out-File Out-File $logFile -Append
 
     Set-Service -Name clussvc -StartupType Manual
-    Stop-Service -DisplayName 'Cluster Service'
+    $sev=Stop-Service -DisplayName 'Cluster Service'
+    $sev.Status -eq "STOPPED"
     Write-Output "Cluster Service is stopped on $computername" |  Out-File $logFile -Append
-}
+    }
 
-else
+catch
     {
     Write-Output "Not able to stop the cluster service on $computername" | Out-File $logFile -Append
     exit 11
     }
+}
+
+
 
 Get-Date |Add-Content $logfile
 

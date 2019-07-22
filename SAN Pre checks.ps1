@@ -79,6 +79,7 @@ else
     Write-Output "Not able to stop the cluster service on $computername" | Out-File $logFile -Append
     exit 11
     }
+
 Get-Date |Add-Content $logfile
 
 # Exit 10 --> EMC PowerPath doesn't found on server

@@ -205,3 +205,9 @@ $localadmins = net localgroup "Power Users" | Select-Object -Skip 5
 [string]::join("`r`n[$Now] ",$localadmins)
 #
 LogCleanupandExit "SUCCESS" 0
+
+# EXIT O --> SUCCESS
+# EXIT 1 --> Starting transcription logging failed
+# EXIT 2 --> Failed to add group $domainGroup to local Power Users group
+# EXIT 3 --> $Computer is in a domain this script does not support
+# EXIT 4 --> Invalid Input Passed Please Input the correct group name need to be added

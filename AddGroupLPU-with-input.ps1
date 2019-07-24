@@ -8,7 +8,7 @@ DEPENDENCY REQUIREMENTS:  Powershell 2.0 and up, Windows Server 2008R2 and up
 
 VERSION HISTORY:
 	VERSION HISTORY:
-	1.0 	07/24/2019 - Need to Input the group name need to be add in Local Power Users 
+	1.0 	07/24/2019 - Need to Input the correct group name which need to be add in Local Power Users 
    
 
 NOTES:
@@ -211,3 +211,9 @@ $localadmins = net localgroup "Power Users" | Select-Object -Skip 5
 [string]::join("`r`n[$Now] ",$localadmins)
 #
 LogCleanupandExit "SUCCESS" 0
+
+# EXIT O --> SUCCESS
+# EXIT 1 --> Starting transcription logging failed
+# EXIT 2 --> Failed to add group $domainGroup to local Power Users group
+# EXIT 3 --> $Computer is in a domain this script does not support
+# EXIT 4 --> Invalid Input Passed Please Input the correct group name need to be added

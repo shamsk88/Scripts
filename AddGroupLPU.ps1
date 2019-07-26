@@ -1,4 +1,4 @@
-<#
+ <#
 NAME:     addGroup2LPU.ps1
 
 AUTHOR:   Shamsher Khan - Associate Tech Lead - Refinitiv
@@ -189,7 +189,6 @@ $global:Now = Set-PSBreakpoint -Variable Now -Mode Read -Action { $global:Now = 
 $global:LogFile = 'c:\Supportfiles\Logs\addGroup2LPU.log'
 $global:Computer = $env:computername.ToUpper()
 #
-Write-Host $args[0]
 VerifyLogDir
 If ($Host.Name -notlike '*PowerGUI*'){
   Start-Log
@@ -199,7 +198,7 @@ If ($domain2use -eq 'OOPS'){
   LogCleanupandExit "$Computer is in a domain this script does not support" 3
 }
 Write-Host "[$Now] For $Computer, we will look in $domain2use for group to add"
-Add2LPU $domain2use 'u6044988'
+Add2LPU $domain2use 'REST-WINDOWS-FLS-DCO-OPS-AND-CLOUD-FR-ServerAdmins'
 Write-Host "[$Now] Contents of local Power Users group after update"
 $localadmins = net localgroup "Power Users" | Select-Object -Skip 5
 [string]::join("`r`n[$Now] ",$localadmins)
@@ -208,6 +207,6 @@ LogCleanupandExit "SUCCESS" 0
 
 # EXIT O --> SUCCESS
 # EXIT 1 --> Starting transcription logging failed
-# EXIT 2 --> Failed to add group $domainGroup to local Power Users group
-# EXIT 3 --> $Computer is in a domain this script does not support
+# EXIT 2 --> Failed to add group domainGroup to local Power Users group
+# EXIT 3 --> Computer is in a domain this script does not support
 # EXIT 4 --> Invalid Input Passed Please Input the correct group name need to be added
